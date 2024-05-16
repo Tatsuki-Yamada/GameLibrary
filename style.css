@@ -1,5 +1,6 @@
 header {
   width: 100%;
+  height: 5vh;
   padding: 30px 4% 10px;
   background-color: #fff;
   /* position: fixed; */
@@ -42,13 +43,14 @@ nav {
 
 .GamePreview {
   width: 100%;
-  height: 50%; /*どうすれば画面を縦に3分割できるか*/
+  height: 60vh; /*どうすれば画面を縦に3分割できるか*/
   background-color: lightgray;
   padding: 30px 4% 10px;
 }
 
 .GmaeDiscription {
   width: 100%;
+  height: 35vh;
   background-color: white;
   padding: 30px 4% 10px;
 }
