@@ -7,6 +7,52 @@
     <title>Document</title>
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js"></script>
+    <script>
+      // ②ここに3Dオブジェクトのスクリプトを書く
+      // ページの読み込みを待つ
+      window.addEventListener("load", init);
+
+      function init() {
+        // サイズを指定
+        const width = window.innerWidth;
+        const height = window.innerHeight * 0.6;
+        // レンダラーを作成
+        const renderer = new THREE.WebGLRenderer({
+          canvas: document.querySelector("#myCanvas"),
+        });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(width, height);
+        // シーンを作成
+        const scene = new THREE.Scene();
+        // カメラを作成
+        const camera = new THREE.PerspectiveCamera(45, width / height);
+        camera.position.set(0, 0, +200);
+
+        // 箱を作成
+        var geometry1 = new THREE.BoxGeometry(20, 20, 50, 3);
+        const material = new THREE.MeshNormalMaterial();
+        material.wireframe = true;
+        // 大きさと材質をセット。
+        var cube1 = new THREE.Mesh(geometry1, material);
+        cube1.position.set(-50, 0, 50);
+        // sceneオブジェクトに立方体を追加
+        scene.add(cube1);
+        // 影
+        cube1.castShadow = true;
+        tick();
+
+        // 毎フレーム時に実行されるループイベント
+        function tick() {
+          // cubeをx軸に少しずつ回す
+          cube1.rotation.x += 0.01;
+          // cubeをy軸に少しずつ回す
+          cube1.rotation.y += 0.01;
+          renderer.render(scene, camera); // レンダリング
+          requestAnimationFrame(tick);
+        }
+      }
+    </script>
   </head>
   <body>
     <header>
@@ -21,7 +67,9 @@
         </ul>
       </nav>
     </header>
-    <div class="GamePreview">ここがゲーム選択画面のブロック</div>
+    <div class="GamePreview">
+      <canvas id="myCanvas"></canvas>
+    </div>
     <div class="GmaeDiscription">ここが選択中ゲームの説明テキストブロック</div>
   </body>
 </html>
